@@ -1,0 +1,10 @@
+FROM docker.elastic.co/logstash/logstash:8.7.0
+
+# Copy the Logstash configuration file to the container
+COPY logstash.conf /usr/share/logstash/pipeline/logstash.conf
+
+# Expose the Logstash port
+EXPOSE 5000
+
+# Start Logstash when the container starts
+CMD ["-f", "/usr/share/logstash/pipeline/logstash.conf"]
