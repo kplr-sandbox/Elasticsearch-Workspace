@@ -38,7 +38,7 @@ class switch(object):
             return False
 
 parser = argparse.ArgumentParser(__file__, description="Fake Apache Log Generator")
-parser.add_argument("--output", "-o", dest='output_type', help="Write to a Log file, a gzip file or to STDOUT", choices=['LOG','GZ','CONSOLE'] )
+parser.add_argument("--output", "-o", dest='output_type', help="Write to a Log file, a gzip file or to STDOUT", choices=['LOG'] )
 parser.add_argument("--log-format", "-l", dest='log_format', help="Log format, Common or Extended Log Format ", choices=['CLF','ELF'], default="ELF" )
 parser.add_argument("--num", "-n", dest='num_lines', help="Number of lines to generate (0 for infinite)", type=int, default=1)
 parser.add_argument("--prefix", "-p", dest='file_prefix', help="Prefix the output file name", type=str)
@@ -56,19 +56,16 @@ faker = Faker()
 timestr = time.strftime("%Y%m%d-%H%M%S")
 otime = datetime.datetime.now()
 
-# outFileName = 'access_log_'+timestr+'.log' if not file_prefix else file_prefix+'_access_log_'+timestr+'.log'
-outFileName = '/workspace/Elasticsearch-Workspace/input/inlog.log'
+outFileName = 'access_log_'+timestr+'.log' if not file_prefix else file_prefix
+# outFileName = '/workspace/Elasticsearch-Workspace/input/inlog.log'
+import os
+print(os.getcwd())
+print(outFileName)
 
 for case in switch(output_type):
     if case('LOG'):
         f = open(outFileName,'w')
         break
-    if case('GZ'):
-        f = gzip.open(outFileName+'.gz','wt')
-        break
-    if case('CONSOLE'): pass
-    if case():
-        f = sys.stdout
 
 response=["200","404","500","301"]
 
