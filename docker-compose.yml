@@ -48,9 +48,6 @@ services:
       - Elasticsearch  
     networks:
       - elk
-  # netcat:
-  #   image: alpine
-  #   entrypoint: nc -l 7777
 volumes:
   elastic_data: {}
 
